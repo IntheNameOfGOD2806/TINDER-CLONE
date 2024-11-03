@@ -1,11 +1,8 @@
 import express from 'express';
+import { getAllMessages, sendMessage } from '../controllers/messageController.js';
 const msgRoutes = express.Router();
 
-msgRoutes.get('/send-message', (req, res) => {
-  res.send('Hello send route!');
-});
-msgRoutes.get('/get-message/:userToChatId', (req, res) => {
-  res.send('Hello send route!');
-});
+msgRoutes.get('/send-message', sendMessage);
+msgRoutes.get('/get-message/:userToChatId', getAllMessages);
 
 export default msgRoutes;

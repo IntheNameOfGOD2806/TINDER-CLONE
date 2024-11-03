@@ -71,7 +71,7 @@ export const getUserProfile = async (req, res) => {
                 { _id: { $nin: currentUser.dislikes } },
                 { genderPreference: { $in: ["both", currentUser.gender] } },
                 { age: { $gte: currentUser.age } },
-                { gender: currentUser.genderPreference === 'both' ? { $in: ["male", "female"] } : { $in: [currentUser.genderPreference, "both"] } },
+                { gender: currentUser.genderPreference === 'both' ? { $in: ["male", "female"] } : { $in: [currentUser.genderPreference] } },
             ],
         })
         res.status(200).json({ success: true, users });

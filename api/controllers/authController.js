@@ -38,6 +38,8 @@ const login = async (req, res) => {
         return res.status(400).json({ success: false, msg: 'Please enter all fields' });
     }
     const user = await User.findOne({ email }).select('+password');
+    const userToRes = await User.findOne({ email }).select('-password');
+
     if (!user) {
         return res.status(400).json({ success: false, msg: 'User does not exist' });
     }
@@ -52,7 +54,7 @@ const login = async (req, res) => {
         sameSite: 'strict',
         secure: process.env.NODE_ENV === 'production',
     })
-    res.status(200).json({ success: true, user });
+    res.status(200).json({ success: true, user: userToRes });
 };
 
 const logout = async (req, res) => {
