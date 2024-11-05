@@ -1,0 +1,26 @@
+import { postLogin } from "../services/apiServices.js";
+import { useState } from "react";
+import toast from "react-hot-toast";
+const UseSignIn = (props) => {
+  const [loading, setLoading] = useState(false);
+  const login = async (email, password) => {
+    try {
+      setLoading(true);
+      const response = await postLogin(email, password);
+      if (response && response?.success === true && response?.user) {
+        toast.success(`Welcome user ${response?.user?.name}!`);
+        localStorage.setItem("auth-user-id", response?._id);
+      }
+      setLoading(false);
+      return response;
+    } catch (e) {
+      setLoading(false);
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+  return { login, loading };
+};
+
+export default UseSignIn;

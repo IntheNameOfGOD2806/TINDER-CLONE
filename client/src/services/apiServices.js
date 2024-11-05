@@ -1,0 +1,39 @@
+import axios from "../utils/axiosCustomize";
+
+const getlistUsers = () => {
+  return axios.get(`api/users`, { withCredentials: true });
+};
+const getAllMessagesOfConversation = (id) => {
+  return axios.get(`api/msg/${id}`, { withCredentials: true });
+};
+const sendMessage = (receiverId, message) => {
+  return axios.post(
+    `api/msg/sendMessage/${receiverId}`,
+    { message },
+    { withCredentials: true }
+  );
+};
+const searchUsers = (keyword) => {
+  return axios.get(`api/users/search?keyword=${keyword}`, {
+    withCredentials: true,
+  });
+};
+const postLogin = async (email, password) => {
+  return axios.post(
+    `api/auth/login`,
+    { email, password },
+    { withCredentials: true }
+  );
+};
+const checkAuth = () => {
+  return axios.get(`api/auth/me`, { withCredentials: true });
+};
+
+export {
+  checkAuth,
+  getlistUsers,
+  getAllMessagesOfConversation,
+  sendMessage,
+  searchUsers,
+  postLogin,
+};
