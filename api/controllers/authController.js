@@ -68,7 +68,7 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  res.clearcookie("jwt");
+  res.cookie("jwt", "", { maxAge: 1 });
   res.status(200).json({ success: true, message: "Logout successful" });
 };
 

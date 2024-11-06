@@ -25,11 +25,19 @@ const postLogin = async (email, password) => {
     { withCredentials: true }
   );
 };
+const postSignup = async (data) => {
+  return axios.post(`api/auth/register`, {...data}, { withCredentials: true });
+};
 const checkAuth = () => {
   return axios.get(`api/auth/me`, { withCredentials: true });
 };
+const postLogout = () => {
+  return axios.post(`api/auth/logout`, {}, { withCredentials: true });
+}
 
 export {
+  postLogout,
+  postSignup,
   checkAuth,
   getlistUsers,
   getAllMessagesOfConversation,

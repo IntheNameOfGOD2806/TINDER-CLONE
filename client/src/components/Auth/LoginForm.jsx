@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import {useState} from 'react';
 import useSignIn from "../../hooks/useSignIn.js";
+import toast from "react-hot-toast";
 const LoginForm = props => {
     const{isLogin} = props;
     const{login,loading} = useSignIn();
@@ -9,7 +10,13 @@ const LoginForm = props => {
 
     const handleSubmitForm = async (e) => {
         e.preventDefault();
-        await login(email, password);
+        const res=await  login(email, password);
+        if(res && res.success===true){
+            toast.success(`Welcome user ${res?.user?.name}!`);
+        }
+        else if(res && res.success===false){
+            toast.error(res?.msg)
+        }
     }
     return (
         <>

@@ -1,0 +1,19 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import {useAuthStore} from "../store/useAuthStore.js";
+
+const HomePage = (props) => {
+    const {logout} =useAuthStore()
+    return (
+
+        <div>asasdadrrrrrrrrrrrrrrr
+            <button className="btn btn-accent"
+                    onClick={() => logout()}
+            >logout</button>
+        </div>
+    );
+};
+
+HomePage.propTypes = {};
+
+export default HomePage;

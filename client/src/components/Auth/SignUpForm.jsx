@@ -1,19 +1,26 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { useAuthStore } from "../../store/useAuthStore";
+
 const SignUpForm = (props) => {
+  SignUpForm.propTypes = {
+    isLogin: PropTypes.bool.isRequired,
+  };
+  const { isLogin } = props;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [gender, setGender] = useState("");
   const [age, setAge] = useState("");
   const [genderPreference, setGenderPreference] = useState("");
-
+  const { signup } = useAuthStore();
   return (
     <div className={"flex flex-col gap-4"}>
       <form
         className={"flex flex-col gap-4"}
         onSubmit={(e) => {
-          handleSubmitForm(e);
+          e.preventDefault();
+          signup({ name, email, password, gender, age, genderPreference });
         }}
       >
         <label className="input input-bordered flex items-center gap-2">
@@ -67,11 +74,12 @@ const SignUpForm = (props) => {
           </svg>
           <input
             value={password}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             type="password"
             className="grow"
+            placeholder="password"
           />
-        </label>
+        </label>           
         {/* AGE */}
         <div>
           <label
@@ -193,6 +201,23 @@ const SignUpForm = (props) => {
                 </label>
               </div>
             </div>
+          </div>
+          <div className="mt-8 text-center">
+            <p className={"text-sm text-green-600"}>
+              {!isLogin ? (
+                <span>New to Dat09? </span>
+              ) : (
+                <span>Already have an account? </span>
+              )}
+            </p>
+            <button
+              type="submit"
+              className={`mt-2 text-red-600  font-medium transition-colors duration-300}
+                            `}
+            >
+              {" "}
+              {!isLogin ? "Create new Account" : "Sign in to your Account"}
+            </button>
           </div>
         </div>
       </form>

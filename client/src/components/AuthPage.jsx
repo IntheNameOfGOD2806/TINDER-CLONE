@@ -5,7 +5,7 @@ import LoginForm from "./Auth/LoginForm.jsx";
 import useSignIn from "../hooks/useSignIn.js";
 
 const AuthPage = (props) => {
-    const [isLogin, setIsLogin] = useState(false);
+    const [isLogin, setIsLogin] = useState(true);
     const {login, loading} = useSignIn();
     return (<>
         {(<div

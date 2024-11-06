@@ -8,7 +8,6 @@ const UseSignIn = (props) => {
       setLoading(true);
       const response = await postLogin(email, password);
       if (response && response?.success === true && response?.user) {
-        toast.success(`Welcome user ${response?.user?.name}!`);
         localStorage.setItem("auth-user-id", response?._id);
       }
       setLoading(false);
