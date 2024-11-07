@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { useAuthStore } from "../../store/useAuthStore";
+import toast from "react-hot-toast";
 
 const SignUpForm = (props) => {
   SignUpForm.propTypes = {
@@ -18,9 +19,19 @@ const SignUpForm = (props) => {
     <div className={"flex flex-col gap-4"}>
       <form
         className={"flex flex-col gap-4"}
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
-          signup({ name, email, password, gender, age, genderPreference });
+          const res = await signup({
+            name,
+            email,
+            password,
+            gender,
+            age,
+            genderPreference,
+          });
+          res &&
+            res.success === true &&
+            toast.success(` user ${res?.user?.name}! registered successfully`);
         }}
       >
         <label className="input input-bordered flex items-center gap-2">
@@ -79,7 +90,7 @@ const SignUpForm = (props) => {
             className="grow"
             placeholder="password"
           />
-        </label>           
+        </label>
         {/* AGE */}
         <div>
           <label
@@ -204,15 +215,32 @@ const SignUpForm = (props) => {
           </div>
           <div className="mt-8 text-center">
             <p className={"text-sm text-green-600"}>
-              {!isLogin ? (
-                <span>New to Dat09? </span>
+              {isLogin ? (
+                <span
+                  className="cursor-pointer"
+                  onClick={(e) => {
+                    props.setIsLogin(false);
+                  }}
+                >
+                  New to Dat09?{" "}
+                </span>
               ) : (
-                <span>Already have an account? </span>
+                <span
+                  className="cursor-pointer"
+                  onClick={(e) => {
+                    props.setIsLogin(true);
+                  }}
+                >
+                  Already have an account?{" "}
+                </span>
               )}
             </p>
             <button
-              type="submit"
-              className={`mt-2 text-red-600  font-medium transition-colors duration-300}
+              onClick={(e) => {
+                handleSubmitForm(e);
+              }}
+              className={`mt-2 text-red-600  font-medium transition-colors duration-300
+                           
                             `}
             >
               {" "}

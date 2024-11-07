@@ -1,16 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
-const ProfilePage = props => {
-    return (
-        <div>
-
-        </div>
-    );
+import React from "react";
+import PropTypes from "prop-types";
+import Header from "./Home/Header";
+const ProfilePage = (props) => {
+  return (
+    <>
+      <div></div>
+    </>
+  );
 };
 
-ProfilePage.propTypes = {
-
-};
+ProfilePage.propTypes = {};
 
 export default ProfilePage;
