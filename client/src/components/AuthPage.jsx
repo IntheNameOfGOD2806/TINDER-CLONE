@@ -3,7 +3,7 @@ import SignUpForm from "./Auth/SignUpForm.jsx";
 import LoginForm from "./Auth/LoginForm.jsx";
 import useSignIn from "../hooks/useSignIn.js";
 
-const AuthPage = (props) => {
+const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const { login, loading } = useSignIn();
   return (

@@ -7,7 +7,7 @@ import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/useAuthStore.js";
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
-
+import TinderWrapper from "./components/TinderLayout/TinderWrapper.jsx";
 function App() {
   const { checkAuth, authUser, checkingAuth } = useAuthStore();
   useEffect(() => {
@@ -23,8 +23,9 @@ function App() {
   }
   return (
     <>
-      <div className="w-full h-full absolute inset-0 -z-10 bg-white bg-gradient-to-br from-slate-200 via-red-100 to-red-300">
-        <Routes>
+      <div className="wrapper w-full h-full absolute inset-0 -z-10 bg-white bg-gradient-to-br from-slate-200 via-red-100 to-red-300">
+        <TinderWrapper>
+            <Routes>
           <Route
             path="/"
             element={authUser ? <HomePage /> : <Navigate to="/auth" />}
@@ -42,6 +43,8 @@ function App() {
             element={!authUser ? <Navigate to="/auth" /> : <ChatPage />}
           />
         </Routes>
+        </TinderWrapper>
+      
         <Toaster />
       </div>
     </>

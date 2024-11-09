@@ -1,8 +1,7 @@
-import React from "react";
+
 import { useAuthStore } from "../../store/useAuthStore";
 import toast from "react-hot-toast";
-function Header(props) {
-  const dropDownRef = React.useRef();
+function Header() {
   const { authUser } = useAuthStore();
   const { logout } = useAuthStore();
   const handelLogout = async () => {
@@ -17,6 +16,7 @@ function Header(props) {
         <div className="flex-1">
           <a className="btn btn-ghost text-xl">daisyUI</a>
         </div>
+        {authUser!==null ? (
         <div className="flex-none gap-2">
           <div className="form-control">
             <input
@@ -25,7 +25,7 @@ function Header(props) {
               className="input input-bordered w-24 md:w-auto"
             />
           </div>
-          {authUser ? (
+        
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
@@ -63,10 +63,11 @@ function Header(props) {
                 </li>
               </ul>
             </div>
+        
+        </div>
           ) : (
             ""
           )}
-        </div>
       </div>
     </header>
   );

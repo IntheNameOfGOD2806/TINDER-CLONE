@@ -1,14 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { useAuthStore } from "../store/useAuthStore.js";
+import UserCard from "./UserCard/UserCard";
 
-import TinderWrapper from "./TinderLayout/TinderWrapper.jsx";
 
-const HomePage = (props) => {
+const HomePage = () => {
+
   return (
-    <TinderWrapper>
-      <div></div>
-    </TinderWrapper>
+     <div className="home-container w-full h-full flex items-center justify-center" >
+      <div className="min-w-96  min-h-96">
+        <UserCard />
+      </div>
+     </div>
+   
   );
 };
 

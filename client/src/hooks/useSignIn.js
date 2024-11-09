@@ -1,9 +1,9 @@
 import { postLogin } from "../services/apiServices.js";
 import { useState } from "react";
-import toast from "react-hot-toast";
+
 import { useAuthStore } from "../store/useAuthStore.js";
 import { useNavigate } from "react-router-dom";
-const UseSignIn = (props) => {
+const UseSignIn = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const login = async (email, password) => {
@@ -11,7 +11,9 @@ const UseSignIn = (props) => {
       setLoading(true);
       const response = await postLogin(email, password);
       if (response && response?.success === true && response?.user) {
-        localStorage.setItem("auth-user-id", response?._id);
+        localStorage.setItem("authuser", response?.user._id);
+
+        localStorage.setItem("auth-user-id", response?.user._id);
         useAuthStore.getState().setAuthUser(response?.user);
         navigate("/");
       }

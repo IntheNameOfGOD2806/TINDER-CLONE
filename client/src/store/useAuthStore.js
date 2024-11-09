@@ -2,13 +2,11 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { checkAuth, postLogout, postSignup } from "../services/apiServices";
 
-export const useAuthStore = devtools(
-  create((set) => ({
+export const useAuthStore = create(
+  devtools((set) => ({
     loading: false,
     error: false,
-    authUser: localStorage.getItem("authuser")
-      ? JSON.parse(localStorage.getItem("authuser"))
-      : null,
+    authUser: null,
     checkingAuth: true,
     signup: async (data) => {
       try {
@@ -16,8 +14,7 @@ export const useAuthStore = devtools(
         const res = await postSignup(data);
         if (res && res?.success && res?.user) {
           localStorage.setItem("authuser", JSON.stringify(res.user._id));
-          set({ authuser: res?.user });
-          return res;
+          set({ authUser: res.user });
         }
       } catch (error) {
         console.log(error);
@@ -29,7 +26,7 @@ export const useAuthStore = devtools(
     logout: async () => {
       localStorage.removeItem("authuser");
       const res = await postLogout();
-      if (res && res?.success && res?.user) {
+      if (res && res?.success) {
         set({ authUser: null });
       }
       return res;
