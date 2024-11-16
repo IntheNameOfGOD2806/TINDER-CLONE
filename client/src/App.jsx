@@ -8,6 +8,7 @@ import { useAuthStore } from "./store/useAuthStore.js";
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import TinderWrapper from "./components/TinderLayout/TinderWrapper.jsx";
+import './App.css'
 function App() {
   const { checkAuth, authUser, checkingAuth } = useAuthStore();
   useEffect(() => {
@@ -17,13 +18,15 @@ function App() {
   if (checkingAuth) {
     return (
       <>
-        <div>loading...</div>
+        <div className="flex items-center justify-center w-full h-screen">
+        <span className="loading loading-bars loading-lg"></span>
+        </div>
       </>
     );
   }
   return (
     <>
-      <div className="wrapper w-full h-full absolute inset-0 -z-10 bg-white bg-gradient-to-br from-slate-200 via-red-100 to-red-300">
+      <div style={{ overflow: "hidden" }}  className="wrapper w-full  -z-10 bg-white bg-gradient-to-br from-slate-200 via-red-100 to-red-300">
         <TinderWrapper>
             <Routes>
           <Route

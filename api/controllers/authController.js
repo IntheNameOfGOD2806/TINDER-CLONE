@@ -1,10 +1,10 @@
 import User from "../models/user.model.js";
 import { signToken } from "../utils/signToken.js";
 const register = async (req, res) => {
-  const { name, email, password, age, gender, genderPreference } = req.body;
+  const { name, email, password, age, gender, genderPreference,repeatPassword,job } = req.body;
 
   try {
-    if (!name || !email || !password || !age || !gender || !genderPreference) {
+    if (!name || !email || !password || !age || !gender || !genderPreference || !repeatPassword || !job) {
       return res
         .status(400)
         .json({ success: false, msg: "Please enter all fields" });
@@ -13,6 +13,11 @@ const register = async (req, res) => {
       return res
         .status(400)
         .json({ success: false, msg: "Age must be greater than 18" });
+    }
+    if(password !== repeatPassword){
+      return res
+        .status(400)
+        .json({ success: false, msg: "Passwords do not match, please try again" });
     }
     const user = await User.findOne({ email });
     if (user) {

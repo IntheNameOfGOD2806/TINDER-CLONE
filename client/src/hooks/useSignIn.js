@@ -11,9 +11,8 @@ const UseSignIn = () => {
       setLoading(true);
       const response = await postLogin(email, password);
       if (response && response?.success === true && response?.user) {
-        localStorage.setItem("authuser", response?.user._id);
-
-        localStorage.setItem("auth-user-id", response?.user._id);
+        localStorage.setItem("authuser", JSON.stringify(response?.user));
+        localStorage.setItem("auth-user-id",  JSON.stringify(response?.user?._id));
         useAuthStore.getState().setAuthUser(response?.user);
         navigate("/");
       }

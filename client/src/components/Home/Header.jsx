@@ -12,7 +12,7 @@ function Header() {
   };
   return (
     <header className="bg-gradient-to-r from-red-200 via-red-200 to-red-400">
-      <div className="navbar  bg-gradient-to-r from-red-200 via-red-200 to-red-400">
+      <div className="navbar h-full  bg-gradient-to-r from-red-200 via-red-200 to-red-400">
         <div className="flex-1">
           <a className="btn btn-ghost text-xl">daisyUI</a>
         </div>

@@ -55,6 +55,18 @@ const userSchema = new Schema({
             ref: "User",
         },
     ],
+    job: {
+        type: String,
+        default: "",
+    },
+    location: {
+        type: String,
+        default: "",
+    },
+    education: {
+        type: String,
+        default: "",
+    },
 
 },
     {
